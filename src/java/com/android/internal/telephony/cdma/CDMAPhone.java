@@ -1413,7 +1413,7 @@ public class CDMAPhone extends PhoneBase {
 
     // Define the pattern/format for carrier specified OTASP number schema.
     // It separates by comma and/or whitespace.
-    private static Pattern pOtaSpNumSchema = Pattern.compile("[,\\s]+");
+    private static Pattern pOtaSpNumSchema = null;
 
     /**
      * The following function checks if a dial string is a carrier specified
@@ -1434,6 +1434,9 @@ public class CDMAPhone extends PhoneBase {
      *     and the code itself is "*2".
      */
     private boolean isCarrierOtaSpNum(String dialStr) {
+        if (pOtaSpNumSchema == null) {
+            pOtaSpNumSchema = Pattern.compile("[,\\s]+");
+        }
         boolean isOtaSpNum = false;
         int sysSelCodeInt = extractSelCodeFromOtaSpNum(dialStr);
         if (sysSelCodeInt == INVALID_SYSTEM_SELECTION_CODE) {
