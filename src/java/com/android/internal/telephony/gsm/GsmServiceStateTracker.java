@@ -1417,7 +1417,11 @@ public class GsmServiceStateTracker extends ServiceStateTracker {
         boolean equalsOnsl = onsl != null && spn.equals(onsl);
         boolean equalsOnss = onss != null && spn.equals(onss);
 
-        return currentMccEqualsSimMcc(s) && (equalsOnsl || equalsOnss);
+        // Add national roaming and make it optional
+        boolean mvnoRoaming = Settings.System.getInt(mPhone.getContext().getContentResolver(),
+                Settings.System.MVNO_ROAMING, 0) == 1;
+
+        return currentMccEqualsSimMcc(s) && (equalsOnsl || equalsOnss || mvnoRoaming);
     }
 
     /**
