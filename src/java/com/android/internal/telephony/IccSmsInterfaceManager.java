@@ -844,7 +844,8 @@ public class IccSmsInterfaceManager {
                 Binder.getCallingUid());
 
         if (!mCellBroadcastRangeManager.enableRange(startMessageId, endMessageId, client)) {
-            log("Failed to add GSM cell broadcast subscription for MID range " + startMessageId
+            if (DBG)
+                log("Failed to add GSM cell broadcast subscription for MID range " + startMessageId
                     + " to " + endMessageId + " from client " + client);
             return false;
         }
@@ -871,7 +872,8 @@ public class IccSmsInterfaceManager {
                 Binder.getCallingUid());
 
         if (!mCellBroadcastRangeManager.disableRange(startMessageId, endMessageId, client)) {
-            log("Failed to remove GSM cell broadcast subscription for MID range " + startMessageId
+            if (DBG)
+                log("Failed to remove GSM cell broadcast subscription for MID range " + startMessageId
                     + " to " + endMessageId + " from client " + client);
             return false;
         }
@@ -898,7 +900,8 @@ public class IccSmsInterfaceManager {
                 Binder.getCallingUid());
 
         if (!mCdmaBroadcastRangeManager.enableRange(startMessageId, endMessageId, client)) {
-            log("Failed to add cdma broadcast subscription for MID range " + startMessageId
+            if (DBG)
+                log("Failed to add cdma broadcast subscription for MID range " + startMessageId
                     + " to " + endMessageId + " from client " + client);
             return false;
         }
@@ -925,7 +928,8 @@ public class IccSmsInterfaceManager {
                 Binder.getCallingUid());
 
         if (!mCdmaBroadcastRangeManager.disableRange(startMessageId, endMessageId, client)) {
-            log("Failed to remove cdma broadcast subscription for MID range " + startMessageId
+            if (DBG)
+                log("Failed to remove cdma broadcast subscription for MID range " + startMessageId
                     + " to " + endMessageId + " from client " + client);
             return false;
         }
