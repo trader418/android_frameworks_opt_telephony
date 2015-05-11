@@ -2054,7 +2054,7 @@ final class GsmServiceStateTracker extends ServiceStateTracker {
 
         switch (notifyType) {
         case PS_ENABLED:
-            long dataSubId = SubscriptionManager.getDefaultDataSubId();
+            int dataSubId = SubscriptionManager.getDefaultDataSubId();
             if (dataSubId != mPhone.getSubId()) {
                 return;
             }
