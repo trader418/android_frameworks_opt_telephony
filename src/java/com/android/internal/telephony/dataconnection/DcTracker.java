@@ -1510,7 +1510,11 @@ public final class DcTracker extends DcTrackerBase {
         // TODO: It'd be nice to only do this if the changed entrie(s)
         // match the current operator.
         if (DBG) log("tryRestartDataConnections: createAllApnList and cleanUpAllConnections");
-        createAllApnList();
+        try {
+            createAllApnList();
+        } catch (NullPointerException e) {
+            // Do Nothing
+        }
         if (isCleanupNeeded) {
             cleanUpAllConnections(!isDisconnected, reason);
         }
@@ -2515,7 +2519,9 @@ public final class DcTracker extends DcTrackerBase {
      * Data Connections and setup the preferredApn.
      */
     private void createAllApnList() {
-        mAllApnSettings.clear();
+        if (mAllApnSettings != null) {
+            mAllApnSettings.clear();
+        }
         String operator = getOperatorNumeric();
         int radioTech = mPhone.getServiceState().getRilDataRadioTechnology();
 
@@ -3054,7 +3060,11 @@ public final class DcTracker extends DcTrackerBase {
                 // set of apns (example, LTE->1x)
                 if (onUpdateIcc()) {
                     log("onUpdateIcc: tryRestartDataConnections " + Phone.REASON_NW_TYPE_CHANGED);
-                    tryRestartDataConnections(true, Phone.REASON_NW_TYPE_CHANGED);
+                    try {
+                        tryRestartDataConnections(true, Phone.REASON_NW_TYPE_CHANGED);
+                    } catch (NullPointerException e) {
+                        // Do Nothing
+                    }
                 } else if (isNvSubscription()){
                     // If cdma subscription source changed to NV or data rat changed to cdma
                     // (while subscription source was NV) - we need to trigger NV ready
